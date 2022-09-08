@@ -1,10 +1,7 @@
 #!/bin/sh
 
 # Install remotely from single shell command
-# Usage : sh -c "$(curl -fsSL https://raw.githubusercontent.com/narze/dotfiles/chezmoi/remote_install.sh)"
-
-echo "Installing Xcode Command Line Tools"
-xcode-select --install
+# Usage : sh -c "$(curl -fsSL https://raw.githubusercontent.com/lexpanov/dotfiles/chezmoi/remote_install.sh)"
 
 set -e # -e: exit on error
 
@@ -24,4 +21,4 @@ else
 fi
 
 # exec: replace current process with chezmoi init
-exec "$chezmoi" init --apply narze
+exec "$chezmoi" init --apply lexpanov

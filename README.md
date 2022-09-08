@@ -6,7 +6,7 @@ I don't want to waste time setting up my machines, so I spent years maintaining 
 
 ## Chezmoi
 
-The latest version of my dotfiles are managed with [Chezmoi](https://chezmoi.io). I was using [Dotbot](https://github.com/narze/dotfiles/tree/dotbot) & [Ansible](https://github.com/narze/dotfiles/tree/ansible) before.
+The latest version of my dotfiles are managed with [Chezmoi](https://chezmoi.io).
 
 ### TODOs
 
@@ -24,7 +24,7 @@ The latest version of my dotfiles are managed with [Chezmoi](https://chezmoi.io)
 ## Usage
 
 ```shell
-ASK=1 sh -c "$(curl -fsSL https://raw.githubusercontent.com/narze/dotfiles/master/remote_install.sh) -x encrypted -v"
+ASK=1 sh -c "$(curl -fsSL https://raw.githubusercontent.com/lexpanov/dotfiles/master/remote_install.sh) -x encrypted -v"
 ```
 
 First installation will ask for your name so you can customize a bit, and it will skip the encryped files, since you have to retrieve the GPG private key manually later. Removing `ASK=1` will use my names for the machine.
@@ -71,69 +71,3 @@ macos                          Run macos script
 - Linux
   - Dotfiles only
 
-<details>
-  <summary><b>Notes</b> (If you have some time to read)</summary>
-
-### Zsh + Fish
-
-After the recent [drama with Zinit](https://github.com/zdharma-continuum/I_WANT_TO_HELP), I decided to give [Fish](https://fishshell.com) a try, it is good but I also want to still maintain my Zsh configuration. I migrated the settings to [zsh4human](https://github.com/romkatv/zsh4humans) which is maintained by the one who made Powerlevel10k. It's 2-3x faster than Zinit as of now.
-
-I'll separate the dotfiles script to install zsh or fish separately to save some space. You can also install both like mine.
-
-### Apple Silicon
-
-Here are the list of issues I've found on running the script on M1 Macbooks (Tested on both Macbook Air & Macbook Pro)
-
-- ~~dotbot/brew fails silently : Now they need XCode to be installed first (via App Store), rather than just XCode CLT~~ Seems to be fixed now
-- ~~Kitty.app installing binaries from Homebrew does get you x86, now you have to [Build from source](https://sw.kovidgoyal.net/kitty/build.html)~~
-
-  - ```shell
-    ghq get -l kovidgoyal/kitty
-    /opt/homebrew/bin/python3 setup.py kitty.app # Needs python3 from brew
-    cp -r kitty.app /Applications/kitty.app
-
-    # Replace CLI
-    rm /opt/homebrew/bin/kitty
-    ln -s $PWD/kitty/launcher/kitty /opt/homebrew/bin/kitty
-    ```
-
-  - If you want both versions, download the executable and rename it (`kitty_x86.app`)
-
-- ~~Docker for Mac : Replace with [Tech Preview version](https://docs.docker.com/docker-for-mac/apple-m1)~~
-- ~~Some brew/asdf packages cannot be installed on arm64~~ See "Apple Silicon specific commands"
-- Setup both versions of Homebrew, then use shell script to point to the correct `brew`
-
-  ```shell
-  # Install both versions
-  arch -arm64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-  # .zshrc
-  if [ "$(uname -m)" == "arm64" ]; then
-    # Use arm64 brew, with fallback to x86 brew
-    if [ -f /opt/homebrew/bin/brew ]; then
-      export PATH="/usr/local/bin${PATH+:$PATH}";
-      eval $(/opt/homebrew/bin/brew shellenv)
-    fi
-  else
-    # Use x86 brew, with fallback to arm64 brew
-    if [ -f /usr/local/bin/brew ]; then
-      export PATH="/opt/homebrew/bin${PATH+:$PATH}";
-      eval $(/usr/local/bin/brew shellenv)
-    fi
-  fi
-  ```
-
-- Rubygems : Specific bundler config is needed (See `bundle config`)
-- Yabai : Cannot use space switch commands (eg. `yabai -m space --focus 1`) even if SIP is disabled
-  <details>
-    <summary>Workaround</summary>
-
-  Setup native shortcut keys manually and use non-consuming shortcut settings (`->`) in `skhd`
-  ![image](https://user-images.githubusercontent.com/248741/111079897-a77e6380-852e-11eb-92d5-42f743dc3060.png)
-  </details>
-
-### ~~Apple Silicon specific commands~~
-
-- `make brew-x86` : Install packages which cannot be instaled with `arm64` arch right now (eg. ~~`kubectl`, `kubectx`~~ Both are now supported!)
-- </details>

@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Use with Github CodeSpaces
-# https://github.com/twpayne/dotfiles/blob/master/install.sh
-
 set -e # -e: exit on error
 
 if [ ! "$(command -v chezmoi)" ]; then
@@ -20,4 +17,5 @@ else
   chezmoi=chezmoi
 fi
 
-exec "$chezmoi" init --apply narze -x encrypted
+# exec: replace current process with chezmoi init
+exec "$chezmoi" init --apply lexpanov -x encrypted
