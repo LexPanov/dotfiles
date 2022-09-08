@@ -1,6 +1,8 @@
 [user]
   name = {{ .name }}
   email = {{ .email }}
+  {{ if not (.gpg_recipient) -}} # [gpg key not set] # {{ end -}}
+  signingkey = {{.gpg_recipient}}
 [core]
   excludesfile = ~/.gitignore_global
   {{ if .flags.delta_is_not_installed -}} # [git-delta not installed] # {{ end -}}
@@ -37,3 +39,7 @@
 [url "ssh://git@github.com/{{ .github_user }}"]
 {{ if .flags.is_codespace -}} # [Disable since it's codespace] #   {{ end -}}
   insteadOf = https://github.com/{{ .github_user }}
+{{ if not (.gpg_recipient) -}} # [gpg key not set] # {{ end -}}
+[commit]
+{{ if not (.gpg_recipient) -}} # [gpg key not set] # {{ end -}}
+gpgsign = true
