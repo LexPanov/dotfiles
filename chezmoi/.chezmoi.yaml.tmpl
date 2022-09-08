@@ -43,3 +43,7 @@ data:
 encryption: gpg
 gpg:
   recipient: {{ $gpg_recipient | quote }}
+
+edit:
+  command: "code"
+  args: ["--wait"]
