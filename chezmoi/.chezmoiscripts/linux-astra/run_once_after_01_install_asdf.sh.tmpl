@@ -1,0 +1,17 @@
+{{- if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "astra") -}}
+#!/bin/sh
+
+# Install/upgrade asdf
+
+source /tmp/chezmoi-utils.sh
+printf "${green}[01 - linux-astra] ${reset} Install/upgrade asdf\n"
+
+if [[ ! $(command -v asdf) ]]; then
+printf "${green}[01 - linux-astra] ${reset} Installing asdf\n"
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v{{ .asdf_version }}
+else
+printf "${green}[01 - linux-astra] ${reset} Updating asdf\n"
+asdf update
+fi
+
+{{ end -}}

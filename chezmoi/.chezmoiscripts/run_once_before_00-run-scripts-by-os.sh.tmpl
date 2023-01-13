@@ -1,0 +1,21 @@
+#!/bin/bash
+
+SCRIPTS_DIR={{ .chezmoi.sourceDir }}/../scripts
+
+{{- if eq .chezmoi.os "darwin" }}
+  OS=darwin
+{{- else if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "ubuntu") }}
+  OS=linux-ubuntu
+{{- else if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "astra") }}
+  OS=linux-astra
+{{- else }}
+  echo "Not supported"
+  exit 0
+{{- end }}
+# echo `pwd`
+# echo "ls $SCRIPTS_DIR/$OS/ : "`ls $SCRIPTS_DIR/$OS/`
+# for script in $SCRIPTS_DIR/$OS/*.*sh
+# do
+#   echo "Starting script $script"
+#   # $script
+# done

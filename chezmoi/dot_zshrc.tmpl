@@ -147,7 +147,7 @@ compdef _directories md
 # Define aliases.
 alias tree='tree -a -I .git'
 # alias ls='lsd'
-
+alias ls='exa --icons -g'
 # Add flags to existing aliases.
 # alias ls="${aliases[ls]:-ls} -vAF"
 
@@ -163,6 +163,16 @@ if [ -f "$HOME/.zshrc.local" ]; then
   source "$HOME/.zshrc.local"
 fi
 
-# z4h source $HOME/.config/zsh/config/00_aliases.zsh
-# z4h source $HOME/.config/zsh/config/10_options.zsh
-# z4h source $HOME/.config/zsh/config/20_functions.zsh
+# Zoxide : prompt hook mode
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init zsh --hook prompt)"
+fi
+
+z4h source $HOME/.config/zsh/config/00_aliases.zsh
+z4h source $HOME/.config/zsh/config/10_options.zsh
+z4h source $HOME/.config/zsh/config/20_functions.zsh
+
+z4h source $HOME/.asdf/asdf.sh
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"

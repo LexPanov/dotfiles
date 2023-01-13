@@ -1,0 +1,19 @@
+{{- if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "astra") -}}
+#!/bin/sh
+
+# Install/upgrade packages
+
+source /tmp/chezmoi-utils.sh
+printf "${green}[00 - linux-astra] ${reset} Install/upgrade packages\n"
+
+printf "${green}[00 - linux-astra] ${reset} Running apt update\n"
+sudo apt update
+
+printf "${green}[00 - linux-astra] ${reset} Installing unzip zsh\n"
+sudo apt install -y unzip zsh
+
+printf "${green}[00 - linux-astra] ${reset} Installing curl git coreutils\n"
+# Dependencies for asdf
+sudo apt install -y curl git coreutils
+
+{{ end -}}

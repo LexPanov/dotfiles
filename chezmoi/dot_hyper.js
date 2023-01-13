@@ -20,17 +20,17 @@ module.exports = {
 		cursorBlink: false,
 
 		// Custom css to embed in the main window.
-		css: `
-      .term_fit:not(.term_term) {
-        opacity: 1 !important
-      }
-      .terminal: not(.focus) {
-        opacity: 1;
-        }
-      .terminal.focus {
-        opacity: 1;
-      }
-    `,
+		// css: `
+		// .term_fit:not(.term_term) {
+		// 	opacity: 1 !important
+		// }
+		// .terminal: not(.focus) {
+		// 	opacity: 1;
+		// 	}
+		// .terminal.focus {
+		// 	opacity: 1;
+		// }
+		// `,
 
 		// custom css to embed in the terminal window
 		termCSS: '',
@@ -88,6 +88,6 @@ module.exports = {
 		  }
     },
     // Hyper plugins.
-    plugins: ['hyper-snazzy', 'shades-of-purple-hyper', "hyperline"],	
+    plugins: ['shades-of-purple-hyper'], //, 'hyper-snazzy', "hyperline"],	
 	// plugins: ['shades-of-purple-hyper'],
 };

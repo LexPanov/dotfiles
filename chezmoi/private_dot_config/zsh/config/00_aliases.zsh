@@ -5,11 +5,6 @@ alias ke='$EDITOR ~/dotfiles/etc/karabiner.edn'
 alias zshrc='$EDITOR ~/.zshrc ; reload'
 alias .tmux='$EDITOR ~/.tmux.conf.local'
 
-# M1
-alias aa='arch -arm64 '
-alias ax='arch -x86_64 '
-alias brewx='ax /usr/local/bin/brew'
-
 # Git
 alias g='git'
 alias p="git add -A -N && git add -p"
@@ -114,7 +109,7 @@ alias gs="gatsby"
 alias gu="gitupdate"
 alias h='helm'
 alias hdi='howdoi'
-alias ip='curl ifconfig.me'
+alias ip_wan='curl ifconfig.me'
 alias jsc='/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc'
 alias qr='qrcode'
 alias sand='cd ~/Sandbox && ls'
